@@ -108,4 +108,17 @@ function ConnectVisiteur($data)
 
 
 }
+
+function ConnectAdmin($data)
+{
+
+  $conn = connect();
+  $email=$data['email'];
+  $mp = md5($data['mp']);
+  $mp=$data['mp'];
+  $req1="SELECT * FROM administrateur WHERE email='$email' AND mp='$mp'"; 
+  $res = $conn->query($req1) ;
+  $user = $res->fetch();
+  return $user;
+}
 ?>

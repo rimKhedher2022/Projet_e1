@@ -24,18 +24,45 @@
                  
                 </ul>
               </li>
-              <li class="nav-item">
+              <?php if ( isset($_SESSION['nom'])) 
+              {
+                print '
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="profile.php">profile</a>
+              </li>';
+                
+                
+              } 
+
+              else 
+              {
+                print '  <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="connexion.php">connexion</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="registre.php">registre</a>
-              </li>
+              </li>';   
+              }
+              ?>
+              
+            
 
             </ul>
-            <form class="d-flex mt-4" action="index.php" method="POST">
+            <form class="d-flex " action="index.php" method="POST">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
               <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
+
+            <?php
+            if (isset($_SESSION['nom']))
+            {
+
+             print '
+              <a href="deconnexion.php" class="btn btn-primary">  deconnexion  </a>' ;
+              
+            }
+
+            ?>
           </div>
         </div>
     </nav>
