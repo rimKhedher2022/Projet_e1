@@ -78,7 +78,8 @@ function getProduitById($id)
  function AddVisiteur($data)
 {
   $conn  = connect();
-  $RIM ="INSERT INTO visiteur(email,mp,nom,prenom,telephone) VALUES ('".$data['email']."','".$data['mp']."','".$data['nom']."','".$data['prenom']."','".$data['telephone']."')";
+  $mphash = md5($data['mp']);
+  $RIM ="INSERT INTO visiteur(email,mp,nom,prenom,telephone) VALUES ('".$data['email']."','".$mphash."','".$data['nom']."','".$data['prenom']."','".$data['telephone']."')";
   $res= $conn->query($RIM);
  //$res->fetch() ;
  if($res)
@@ -98,6 +99,7 @@ function ConnectVisiteur($data)
 {
   $conn = connect();
   $email=$data['email'];
+  $mp = md5($data['mp']);
   $mp=$data['mp'];
   $req1="SELECT * FROM visiteur WHERE email='$email' AND mp='$mp'"; 
   $res = $conn->query($req1) ;

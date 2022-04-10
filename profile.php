@@ -23,6 +23,12 @@ session_start();
 
     <h1> Bienvenue <span class="text-primary"><?php  echo $_SESSION['nom']." ".$_SESSION['prenom']; ?></span></h1>
     <h2>Email : <?php  echo $_SESSION['email']; ?> </h2>
+
+      <a href="deconnexion.php">deconnexion</a>
+
+
+
+
     </body>
 
 
