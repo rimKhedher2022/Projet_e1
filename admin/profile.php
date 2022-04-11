@@ -76,7 +76,7 @@ session_start();
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="categories/liste.php">
               <span data-feather="file"></span>
               categories
             </a>
