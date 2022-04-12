@@ -16,7 +16,7 @@ $categories = getAllCategorie();
 if(!empty($_POST))
 {
   $user =  ConnectVisiteur($_POST);
-  if(count($user) > 0) // utilisateur connecté
+  if( is_array($user) && count($user) > 0) // utilisateur connecté
   {
     Session_start();
     $_SESSION['email'] = $user['email'] ;

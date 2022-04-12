@@ -18,6 +18,7 @@ if(!empty($_POST))
   if(count($user) > 0) // utilisateur connecté
   {
     Session_start();
+    $_SESSION['id']= $user['id'] ;
     $_SESSION['email'] = $user['email'] ;
     $_SESSION['nom'] = $user['nom'] ;
     $_SESSION['mp'] = $user['mp'] ;

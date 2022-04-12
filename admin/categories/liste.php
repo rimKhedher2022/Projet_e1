@@ -64,7 +64,7 @@ $categories = getAllCategorie();
         <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
         <div class="navbar-nav">
             <div class="nav-item text-nowrap">
-                <a class="nav-link px-3" href="../deconnexion.php">deconnexion</a>
+                <a class="nav-link px-3" href="../../deconnexion.php">deconnexion</a>
             </div>
         </div>
     </header>
@@ -120,29 +120,28 @@ $categories = getAllCategorie();
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">Liste des categories</h1>
-
+                   
                     <div>
-                       <a href="ajout.php" class="btn btn-primary">Ajouter</a>
+                        <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Ajouter</a>
                     </div>
 
 
 
-
-
-
-
-
-
-
                 </div>
-
-
-
-
+<!--liste debut-->
 
                 <div>
+                    <?php if (isset($_GET['ajout'])&& $_GET['ajout']=="ok")
+                    {
+                        print' <div class="alert alert-success">
+                        categorie ajouté avec succes
 
-                    <!--liste debut-->
+                     </div>';
+                    }
+            
+                    ?>
+               
+                    
                     <table class="table">
                         <thead>
                             <tr>
@@ -156,14 +155,12 @@ $categories = getAllCategorie();
 
 
                             <?php
-                            foreach($categories as $c)
-
-                            {
+                            foreach ($categories as $c) {
                                 print '
                                 <tr>
-                                <th scope="row">'.$c['id'].'</th>
-                                <td>'.$c['nom'].'</td>
-                                <td>'.$c['description'].'</td>
+                                <th scope="row">' . $c['id'] . '</th>
+                                <td>' . $c['nom'] . '</td>
+                                <td>' . $c['description'] . '</td>
                                 <td>
                                     
                  <a href="http://" class="btn btn-success">modifier</a>
@@ -177,10 +174,13 @@ $categories = getAllCategorie();
 
                             ?>
 
-                            
-                           
+
+
                         </tbody>
                     </table>
+
+
+
                 </div>
 
 
@@ -189,6 +189,40 @@ $categories = getAllCategorie();
     </div>
 
 
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajout categorie</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <form action="ajout.php" method="post">
+
+                        <div class="from-group">
+                            <input type="text" name="nom" class="form-control" placeholder="nom de categorie">
+                        </div>
+                        <div class="from-group">
+                            <textarea name="description" class="form-control" placeholder="description de categorie"></textarea>
+                        </div>
+
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+
+                    <button type="submit" class="btn btn-primary">ajouter</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
     <script src="../../js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
