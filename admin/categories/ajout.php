@@ -12,7 +12,7 @@ try {
 $requete ="INSERT INTO categorie(nom,description,createur,date_creation) VALUES ('$nom','$description','$createur','$date_createur')";
 $resultat=$conn->query($requete);
 
-
+// un code ajouté
 if($resultat)
 
 {
