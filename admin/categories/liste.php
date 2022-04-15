@@ -239,7 +239,9 @@ $categories = getAllCategorie();
                 </div>
                 <div class="modal-footer">
 
-                    <button type="submit" class="btn btn-primary">ajouter</button>
+                    <button type="submit" class="btn btn-primary">ajouter</button> 
+                    <h1>.</h1>
+                    
                 </div>
                 
             </div>
