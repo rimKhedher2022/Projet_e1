@@ -240,7 +240,7 @@ $categories = getAllCategorie();
                 <div class="modal-footer">
 
                     <button type="submit" class="btn btn-primary">ajouter</button> 
-                    <h1>.</h1>
+                    <h1>.     </h1>
                     
                 </div>
                 
