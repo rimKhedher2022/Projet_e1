@@ -5,5 +5,5 @@ session_destroy();
 
 header('location:index.php');
 
-
+// malak en train de lire le code et coder;
 ?>
