@@ -226,12 +226,10 @@ $categories = getAllCategorie();
 
                         <div class="from-group" id="blocknom">
 
-
-
-                            <input type="text" name="nom" id="nom" class="form-control" placeholder="nom de categorie">
+                            <input type="text" name="nom" required id="nom" class="form-control" placeholder="nom de categorie">
                         </div>
                         <div class="from-group">
-                            <textarea name="description"  class="form-control" placeholder="description de categorie"></textarea>
+                            <textarea name="description" required  class="form-control" placeholder="description de categorie"></textarea>
                         </div>
 
                     </form>

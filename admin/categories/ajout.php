@@ -20,7 +20,8 @@ if($resultat)
 }
 
  } catch(PDOException $e) {
-   echo "connection failed " . $e->getMessage();
+   //echo "connection failed " . $e->getMessage();
+   echo $e->getcode() ; 
  }
 
 ?>
