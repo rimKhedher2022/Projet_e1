@@ -75,7 +75,7 @@ $categories = getAllCategorie();
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Liste des categories</h1>
+                    <h1 class="h2">Liste des produits</h1>
                    
 
                     
@@ -96,44 +96,10 @@ $categories = getAllCategorie();
 
                  
 
-                    <?php if (isset($_GET['ajout'])&& $_GET['ajout']=="ok")
-                    {
-                        print' <div class="alert alert-success">
-                        categorie ajouté avec succes
 
-                     </div>';
-                    }
-            
-                    ?>
+                    
 
-                    <?php if (isset($_GET['delete'])&& $_GET['delete']=="ok")
-                    {
-                        print' <div class="alert alert-success">
-                        categorie sup avec succes
-
-                     </div>';
-                    }
-            
-                    ?>
-
-                    <?php if (isset($_GET['modif'])&& $_GET['modif']=="ok")
-                    {
-                        print' <div class="alert alert-success">
-                        categorie modif avec succes
-
-                     </div>';
-                    }
-                    ?>
-                    <?php if (isset($_GET['erreur'])&& $_GET['erreur']=="duplicate")
-                    { //ajout
-                        print' <div class="alert alert-danger">
-                        categorie existe 
-
-                     </div>';
-                    }
-            
-                    ?>
-
+                  
 
                
                     
@@ -150,22 +116,7 @@ $categories = getAllCategorie();
 
 
                             <?php
-                            foreach ($categories as $c) {
-                                print '
-                                <tr>
-                                <th scope="row">' . $c['id'] . '</th>
-                                <td>'.$c['nom'].'</td>
-                                <td>'.$c['description'].'</td>
-                                <td>
-                                    
-                 <a  data-bs-toggle="modal" data-bs-target="#editModal'.$c['id'].'" class="btn btn-success">modifier</a>
-                 <a href="supprimer.php?idc='.$c['id'].'" class="btn btn-danger">supprimer</a>
-
-
-                                </td>
-                            </tr>
-                                ';
-                            }
+                        
 
                             ?>
 
@@ -194,28 +145,52 @@ $categories = getAllCategorie();
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Ajout Categorie</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Ajout produit</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-     <form action="ajout.php" method="post" id="addform">
-                            <div class="form-group" id="blocknom">
-                                <input type="text" id="nom" name="nom" class="form-control" placeholder="nom cat">
+      <form action="ajout.php" method="post" enctype="multipart/form-data">
+                            <div class="form-group" >
+                                <input type="text" name="nom" class="form-control" placeholder="nom produit">
 
                             </div>
                             <div class="form-group">
-                                <textarea  name="description"  class="form-control"  placeholder="description categorie"></textarea>
+                                <textarea  name="description"  class="form-control"  placeholder="description produit"></textarea>
 
                             </div>
 
 
-     
+
+                            <div class="form-group" >
+                                <input type="number" step="0.01" name="prix" class="form-control" placeholder="prix">
+
+                            </div>
+                            <div class="form-group" >
+                                <input type="file"  name="image" class="form-control" placeholder="prix">
+
+                            </div>
+                            <div class="form-group" >
+                                <select name="categorie" class="form-control" >
+                                
+                                    <?php
+                                    foreach($categories as $index => $c)
+                                    print '<option value="'.$c['id'].'">'.$c['nom'].'</option>'
+                                    ?>
+
+                                </select>
+                                
+                            </div>
+                            <input type="hidde"  name ="createur" value="<?php echo $_SESSION['id'];?> ">
+                            
+
+                          
       </div>
+    
       <div class="modal-footer">
         
         <button type="submit" class="btn btn-primary">ajouter</button>
       </div>
-    </form>
+      </form> 
 
 
                     
@@ -283,17 +258,7 @@ foreach($categories as $index => $categorie)
     <script src="../../js/dashboard.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     
-    <script>
-
-        ('#addform').submit(function()
-        {
-            if($('#nom').val() == "")
-            {
-                $('#blocknom').append('<p class="text-danger">il faut remplir le champs nom..</p>'); 
-                return false ; 
-            }
-        })
-    </script>
+  
 </body>
 
 </html>
