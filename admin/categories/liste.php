@@ -252,6 +252,7 @@ $categories = getAllCategorie();
 
                             </div>
 
+
       
       </div>
       <div class="modal-footer">
@@ -259,6 +260,27 @@ $categories = getAllCategorie();
         <button type="submit" class="btn btn-primary">ajouter</button>
       </div>
       </form>
+
+
+                            <input type="text" name="nom" id="nom" class="form-control" placeholder="nom de categorie">
+                        </div>
+                        <div class="from-group">
+                            <textarea name="description"  class="form-control" placeholder="description de categorie"></textarea>
+                        </div>
+
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+
+                    <button type="submit" class="btn btn-primary">ajouter</button> 
+                    <h1>.     </h1>
+                    
+                </div>
+                
+            </div>
+        </div>
+
     </div>
   </div>
 </div>
