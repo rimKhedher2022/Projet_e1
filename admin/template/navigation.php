@@ -34,7 +34,7 @@
           <li class="nav-item">
             <a class="nav-link active" href="#">
               <span data-feather="layers"></span>
-              Profile
+              Profile ici
             </a>
           </li>
         </ul>
