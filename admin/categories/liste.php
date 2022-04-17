@@ -242,7 +242,7 @@ $categories = getAllCategorie();
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="ajout.php" method="post" id="addform">
+     <form action="ajout.php" method="post" id="addform">
                             <div class="form-group" id="blocknom">
                                 <input type="text" id="nom" name="nom" class="form-control" placeholder="nom cat">
 
@@ -253,37 +253,27 @@ $categories = getAllCategorie();
                             </div>
 
 
-      
+     
       </div>
       <div class="modal-footer">
         
         <button type="submit" class="btn btn-primary">ajouter</button>
       </div>
-      </form>
+    </form>
 
 
-                            <input type="text" name="nom" id="nom" class="form-control" placeholder="nom de categorie">
-                        </div>
-                        <div class="from-group">
-                            <textarea name="description"  class="form-control" placeholder="description de categorie"></textarea>
-                        </div>
-
-                    </form>
-
-                </div>
-                <div class="modal-footer">
-
-                    <button type="submit" class="btn btn-primary">ajouter</button> 
-                    <h1>.     </h1>
                     
-                </div>
+
+           
+
+              
+               
                 
             </div>
         </div>
 
     </div>
-  </div>
-</div>
+
 
 
     <?php
