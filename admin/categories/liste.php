@@ -169,7 +169,7 @@ $categories = getAllCategorie();
                     }
                     ?>
                     <?php if (isset($_GET['erreur'])&& $_GET['erreur']=="duplicate")
-                    {
+                    { //ajout
                         print' <div class="alert alert-danger">
                         categorie existe 
 
