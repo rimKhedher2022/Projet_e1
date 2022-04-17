@@ -121,16 +121,25 @@ $categories = getAllCategorie();
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">Liste des categories</h1>
                    
+
+                    
+
+
+
                     <div>
                         <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Ajouter</a>
                     </div>
 
 
 
-                </div>
-<!--liste debut-->
+                 </div>
+                   <!--liste debut-->
 
-                <div>
+                 <div>
+
+
+                 
+
                     <?php if (isset($_GET['ajout'])&& $_GET['ajout']=="ok")
                     {
                         print' <div class="alert alert-success">
@@ -158,6 +167,14 @@ $categories = getAllCategorie();
 
                      </div>';
                     }
+                    ?>
+                    <?php if (isset($_GET['erreur'])&& $_GET['erreur']=="duplicate")
+                    {
+                        print' <div class="alert alert-danger">
+                        categorie existe 
+
+                     </div>';
+                    }
             
                     ?>
 
@@ -181,11 +198,11 @@ $categories = getAllCategorie();
                                 print '
                                 <tr>
                                 <th scope="row">' . $c['id'] . '</th>
-                                <td>' . $c['nom'] . '</td>
-                                <td>' . $c['description'] . '</td>
+                                <td>'.$c['nom'].'</td>
+                                <td>'.$c['description'].'</td>
                                 <td>
                                     
-                 <a   data-bs-toggle="modal" data-bs-target="#editModal'.$c['id'].'" class="btn btn-success">modifier</a>
+                 <a  data-bs-toggle="modal" data-bs-target="#editModal'.$c['id'].'" class="btn btn-success">modifier</a>
                  <a href="supprimer.php?idc='.$c['id'].'" class="btn btn-danger">supprimer</a>
 
 
@@ -203,6 +220,7 @@ $categories = getAllCategorie();
 
 
 
+
                 </div>
 
 
@@ -213,38 +231,37 @@ $categories = getAllCategorie();
 
 
     <!-- Modal Ajout -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ajout categorie</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
+   
 
-                    <form action="ajout.php" method="post" id="addform">
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ajout Categorie</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="ajout.php" method="post" id="addform">
+                            <div class="form-group" id="blocknom">
+                                <input type="text" id="nom" name="nom" class="form-control" placeholder="nom cat">
 
-                        <div class="from-group" id="blocknom">
+                            </div>
+                            <div class="form-group">
+                                <textarea  name="description"  class="form-control"  placeholder="description categorie"></textarea>
 
+                            </div>
 
-
-                            <input type="text" name="nom" id="nom" class="form-control" placeholder="nom de categorie">
-                        </div>
-                        <div class="from-group">
-                            <textarea name="description"  class="form-control" placeholder="description de categorie"></textarea>
-                        </div>
-
-                    </form>
-
-                </div>
-                <div class="modal-footer">
-
-                    <button type="submit" class="btn btn-primary">ajouter</button>
-                </div>
-                
-            </div>
-        </div>
+      
+      </div>
+      <div class="modal-footer">
+        
+        <button type="submit" class="btn btn-primary">ajouter</button>
+      </div>
+      </form>
     </div>
+  </div>
+</div>
 
 
     <?php
@@ -252,36 +269,36 @@ foreach($categories as $index => $categorie)
 {?>
 
  <!-- Modal Modification -->
- <div class="modal fade" id="editModal<?php $categorie['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">modifier categorie</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
 
-                    <form action="modifier.php" method="post">
-                        <input type="hidden" value="<?php echo $categorie['id']; ?>" name="idc" />
+ <div class="modal fade" id="editModal<?php echo $categorie['id'];?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">modifier Categorie</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+<div class="modal-body">
+    <form action="modifier.php" method="post">
+        <input type="hidden" value="<?php echo $categorie['id']; ?>" name="idc" />
+                            <div class="form-group">
+                                <input type="text" name="nom" class="form-control" value="<?php echo $categorie['nom']; ?>" placeholder="nom cat">
 
-                        <div class="from-group">
-                            <input type="text" name="nom" class="form-control" value="<?php $categorie['nom'] ;?>" placeholder="nom de categorie">
-                        </div>
-                        <div class="from-group">
-                            <textarea name="description" class="form-control" placeholder="description de categorie"> <?php $categorie['description'] ;?></textarea>
-                        </div>
+                            </div>
+                            <div class="form-group">
+                                <textarea  name="description" class="form-control"  placeholder="description categorie"> <?php echo $categorie['description']; ?> </textarea>
 
-                    </form>
+                            </div>
 
-                </div>
-                <div class="modal-footer">
-
-                    <button type="submit" class="btn btn-primary">Modifier</button>
-                </div>
-                
-            </div>
-        </div>
+      
+</div>
+      <div class="modal-footer">
+        
+        <button type="submit" class="btn btn-primary">modifier</button>
+      </div>
+    </form>
     </div>
+  </div>
+</div>
 
 <?php
 }
@@ -292,14 +309,17 @@ foreach($categories as $index => $categorie)
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
     <script src="../../js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
+
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
     <script src="../../js/dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    
     <script>
 
         ('#addform').submit(function()
         {
-            if($('#nom').val()=="")
+            if($('#nom').val() == "")
             {
                 $('#blocknom').append('<p class="text-danger">il faut remplir le champs nom..</p>'); 
                 return false ; 

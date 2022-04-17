@@ -9,7 +9,8 @@ $date_modification = date("Y-m-d");
 include "../../inc/functions.php"; 
 $conn=connect();
 
-$requete ="UPDATE categorie SET nom='$nom',description='$description', date_modification='$date_modification' WHERE id='$id'";
+$requete ="UPDATE categorie SET nom='$nom',description='$description', 
+date_modification='$date_modification' WHERE id='$id'";
 $resultat=$conn->query($requete);
 
 
