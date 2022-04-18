@@ -42,7 +42,19 @@ if(isset($_GET['id']))
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><?php echo $produit['prix'] ?> DT</li>
-                <li class="list-group-item"><?php echo $produit['categorie'] ?></li>
+
+                <?php 
+                 foreach ($categories as $index => $c)
+
+                {
+                    if($c['id']==$produit['categorie'])
+
+                    {
+                       print '<li class="list-group-item">'.$c['nom'].'</li>';
+                    }
+                }
+                ?>
+                
 
             </ul>
 

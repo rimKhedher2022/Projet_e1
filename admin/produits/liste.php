@@ -3,6 +3,7 @@ session_start();
 
 include "../../inc/functions.php";
 $categories = getAllCategorie();
+$produits = getAllProducts();
 ?>
 
 <!doctype html>
@@ -86,10 +87,90 @@ $categories = getAllCategorie();
                         <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Ajouter</a>
                     </div>
 
-
-
+             
                  </div>
                    <!--liste debut-->
+
+
+                   <?php if (isset($_GET['ajout'])&& $_GET['ajout']=="ok")
+                    {
+                        print' <div class="alert alert-success">
+                        produit ajouté avec succes
+
+                     </div>';
+                    }
+            
+                    ?>
+
+                    <?php if (isset($_GET['delete'])&& $_GET['delete']=="ok")
+                    {
+                        print' <div class="alert alert-success">
+                        produit sup avec succes
+
+                     </div>';
+                    }
+            
+                    ?>
+
+                    <?php if (isset($_GET['modif'])&& $_GET['modif']=="ok")
+                    {
+                        print' <div class="alert alert-success">
+                        produit modif avec succes
+
+                     </div>';
+                    }
+                    ?>
+                    <?php if (isset($_GET['erreur'])&& $_GET['erreur']=="duplicate")
+                    { //ajout
+                        print' <div class="alert alert-danger">
+                        produitf existe 
+
+                     </div>';
+                    }
+            
+                    ?>
+
+
+
+
+                   <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Desc</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            <?php
+                            foreach ($produits as $i=>$p) {
+                                $i++;
+                                print '
+                                <tr>
+                                <th scope="row">' .$i. '</th>
+                                <td>'.$p['nom'].'</td>
+                                <td>'.$p['description'].'</td>
+                                <td>
+                                    
+                                    <a  data-bs-toggle="modal" data-bs-target="#editModal'.$p['id'].'" class="btn btn-success">modifier</a>
+                                      <a href="supprimer.php?idc='.$p['id'].'" class="btn btn-danger">supprimer</a>
+
+
+                                </td>
+                              </tr>
+                                ';
+                            }
+
+                            ?>
+
+
+
+                        </tbody>
+            </table>
+
 
                  <div>
 
@@ -103,27 +184,7 @@ $categories = getAllCategorie();
 
                
                     
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nom</th>
-                                <th scope="col">Desc</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-
-                            <?php
-                        
-
-                            ?>
-
-
-
-                        </tbody>
-                    </table>
+                   
 
 
 
@@ -208,27 +269,27 @@ $categories = getAllCategorie();
 
 
     <?php
-foreach($categories as $index => $categorie) 
+foreach($produits as $index => $produit) 
 {?>
 
  <!-- Modal Modification -->
 
- <div class="modal fade" id="editModal<?php echo $categorie['id'];?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ <div class="modal fade" id="editModal<?php echo $produit['id'];?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="editModalLabel">modifier Categorie</h5>
+        <h5 class="modal-title" id="editModalLabel">modifier produit</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 <div class="modal-body">
     <form action="modifier.php" method="post">
-        <input type="hidden" value="<?php echo $categorie['id']; ?>" name="idc" />
+        <input type="hidden" value="<?php echo $produit['id']; ?>" name="idc" />
                             <div class="form-group">
-                                <input type="text" name="nom" class="form-control" value="<?php echo $categorie['nom']; ?>" placeholder="nom cat">
+                                <input type="text" name="nom" class="form-control" value="<?php echo $produit['nom']; ?>" placeholder="nom cat">
 
                             </div>
                             <div class="form-group">
-                                <textarea  name="description" class="form-control"  placeholder="description categorie"> <?php echo $categorie['description']; ?> </textarea>
+                                <textarea  name="description" class="form-control"  placeholder="description produit"> <?php echo $produit['description']; ?> </textarea>
 
                             </div>
 
