@@ -138,6 +138,13 @@ function getAllusers()
 
 function getStocks()
 {
-  
+  $conn = connect();
+
+  $req1="SELECT nom, quantite from produit,stock where ptoduit.id=stock.produit"; 
+  $res = $conn->query($req1) ;
+  $stocks = $res->fetchAll();
+
+  return $stocks;
+
 }
 ?>

@@ -2,7 +2,8 @@
 session_start();
 
 include "../../inc/functions.php";
-$categories = getAllCategorie();
+$stocks = getStocks();
+
 ?>
 
 <!doctype html>
@@ -146,15 +147,15 @@ $categories = getAllCategorie();
 
 
                             <?php
-                            foreach ($categories as $c) {
+                            foreach ($stocks as $s) {
                                 print '
                                 <tr>
                                 <th scope="row">' . $c['id'] . '</th>
-                                <td>' . $c['nom'] . '</td>
-                                <td>' . $c['description'] . '</td>
+                                <td>' . $s['nom'] . '</td>
+                                <td>' . $s['description'] . '</td>
                                 <td>
                                     
-                                    <a  data-bs-toggle="modal" data-bs-target="#editModal' . $c['id'] . '" class="btn btn-success">modifier</a>
+                                    <a  data-bs-toggle="modal" data-bs-target="#editModal' . $s['id'] . '" class="btn btn-success">modifier</a>
                                       
 
 
