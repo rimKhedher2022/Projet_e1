@@ -230,7 +230,7 @@ $produits = getAllProducts();
                                 <input type="file"  name="image" class="form-control" placeholder="prix">
 
                             </div>
-                            <div class="form-group" >
+                            <div class="form-group mb-3" >
                                 <select name="categorie" class="form-control" >
                                 
                                     <?php
@@ -239,13 +239,17 @@ $produits = getAllProducts();
                                     ?>
 
                                 </select>
-                                
-                            </div>
-                            <input type="hidde"  name ="createur" value="<?php echo $_SESSION['id'];?> ">
+                                </div>
+                                <div class="form-group">
+                                    <input type="number" name="quantite" class="form-control" placeholder="tapez la quantité ">
+
+                                </div>
+                                </div>
+                            <input type="hidden"  name ="createur" value="<?php echo $_SESSION['id'];?> ">
                             
 
                           
-      </div>
+  
     
       <div class="modal-footer">
         

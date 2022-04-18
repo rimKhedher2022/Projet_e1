@@ -2,7 +2,7 @@
 session_start();
 
 include "../../inc/functions.php";
-$categories = getAllCategorie();
+$visiteurs = getAllusers();
 ?>
 
 <!doctype html>
@@ -75,7 +75,7 @@ $categories = getAllCategorie();
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Liste des categories</h1>
+                    <h1 class="h2">Liste des visiteurs</h1>
 
 
 
@@ -83,7 +83,7 @@ $categories = getAllCategorie();
 
 
                     <div>
-                        <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Ajouter</a>
+                        
                     </div>
 
 
@@ -96,39 +96,18 @@ $categories = getAllCategorie();
 
 
 
-                    <?php if (isset($_GET['ajout']) && $_GET['ajout'] == "ok") {
+                    <?php if (isset($_GET['valider']) && $_GET['valider'] == "ok") {
                         print ' <div class="alert alert-success">
-                        categorie ajouté avec succes
-
+                        visiteur validée 
                      </div>';
                     }
 
                     ?>
 
-                    <?php if (isset($_GET['delete']) && $_GET['delete'] == "ok") {
-                        print ' <div class="alert alert-success">
-                        categorie sup avec succes
+                  
 
-                     </div>';
-                    }
-
-                    ?>
-
-                    <?php if (isset($_GET['modif']) && $_GET['modif'] == "ok") {
-                        print ' <div class="alert alert-success">
-                        categorie modif avec succes
-
-                     </div>';
-                    }
-                    ?>
-                    <?php if (isset($_GET['erreur']) && $_GET['erreur'] == "duplicate") { //ajout
-                        print ' <div class="alert alert-danger">
-                        categorie existe 
-
-                     </div>';
-                    }
-
-                    ?>
+                    
+                 
 
 
 
@@ -137,8 +116,8 @@ $categories = getAllCategorie();
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Nom</th>
-                                <th scope="col">Desc</th>
+                                <th scope="col">Nom et prenom</th>
+                                <th scope="col">email</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -146,16 +125,18 @@ $categories = getAllCategorie();
 
 
                             <?php
-                            foreach ($categories as $c) {
+                            $i=0;
+                            foreach ($visiteurs as $i => $visiteur) {
+                                $i++;
                                 print '
                                 <tr>
-                                <th scope="row">' . $c['id'] . '</th>
-                                <td>' . $c['nom'] . '</td>
-                                <td>' . $c['description'] . '</td>
+                                <th scope="row">' . $i. '</th>
+                                <td>' . $visiteur['nom'].' '.$visiteur['prenom'].'</td>
+                                <td>' . $visiteur['email'] . '</td>
                                 <td>
                                     
-                                    <a  data-bs-toggle="modal" data-bs-target="#editModal' . $c['id'] . '" class="btn btn-success">modifier</a>
-                                      <a onClick="return popUpDeleteCategorie()" href="supprimer.php?idc=' . $c['id'] . '" class="btn btn-danger">supprimer</a>
+                                    <a  href="valider.php?id='.$visiteur['id'].'"  class="btn btn-success">valider</a>
+                                     
 
 
                                 </td>
@@ -185,87 +166,13 @@ $categories = getAllCategorie();
     <!-- Modal Ajout -->
 
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ajout Categorie</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="ajout.php" method="post" id="addform">
-                        <div class="form-group" id="blocknom">
-                            <input type="text" id="nom" name="nom" class="form-control" placeholder="nom cat">
-
-                        </div>
-                        <div class="form-group">
-                            <textarea name="description" class="form-control" placeholder="description categorie"></textarea>
-
-                        </div>
+  
 
 
 
-                </div>
-                <div class="modal-footer">
+  
 
-                    <button type="submit" class="btn btn-primary">ajouter</button>
-                </div>
-                </form>
-
-
-
-
-
-
-
-
-
-            </div>
-        </div>
-
-    </div>
-
-
-
-    <?php
-    foreach ($categories as $index => $categorie) { ?>
-
-        <!-- Modal Modification -->
-
-        <div class="modal fade" id="editModal<?php echo $categorie['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="editModalLabel">modifier Categorie</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="modifier.php" method="post">
-                            <input type="hidden" value="<?php echo $categorie['id']; ?>" name="idc" />
-                            <div class="form-group">
-                                <input type="text" name="nom" class="form-control" value="<?php echo $categorie['nom']; ?>" placeholder="nom cat">
-
-                            </div>
-                            <div class="form-group">
-                                <textarea name="description" class="form-control" placeholder="description categorie"> <?php echo $categorie['description']; ?> </textarea>
-
-                            </div>
-
-
-                    </div>
-                    <div class="modal-footer">
-
-                        <button type="submit" class="btn btn-primary">modifier</button>
-                    </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-    <?php
-    }
-    ?>
+   
 
 
 

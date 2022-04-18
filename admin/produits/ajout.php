@@ -6,6 +6,12 @@ $description = $_POST['description'];
 $prix = $_POST['prix'];
 $createur = $_POST['createur'];
 $categorie = $_POST['categorie'];
+$quantite = $_POST['quantite'];
+$date_creation = date("Y-m-d");
+
+
+
+
 
 $target_dir = "../../images/";
 $target_file = $target_dir.basename($_FILES["image"]["name"]);
@@ -27,13 +33,28 @@ $conn=connect();
 
 try {
     $requete ="INSERT INTO produit(nom,description,prix,image,createur,categorie,date_creation) VALUES ('$nom','$description','$prix','$image','$createur','$categorie','$date')";
+    
+
     $resultat=$conn->query($requete);
 
-
+   
     if($resultat)
 
     {
-      header('location:liste.php?ajout=ok');
+
+      $produit_id = $conn->lastInsertId();
+
+
+      $requete2 ="INSERT INTO stock(produit,quantité,createur,date_creation) VALUES ('$produit_id','$quantite','$createur','$date_creation')";
+      if($conn->query($requete2))
+      {
+        header('location:liste.php?ajout=ok');
+      }else{
+        echo "impossible d'ajouter le stock du produit";
+      }
+
+
+     
     }
 
     } catch(PDOException $e) {

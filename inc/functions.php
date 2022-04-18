@@ -121,4 +121,23 @@ function ConnectAdmin($data)
   $user = $res->fetch();
   return $user;
 }
+
+function getAllusers()
+
+{
+  $conn = connect();
+
+  $req1="SELECT * FROM visiteur WHERE etat=0"; 
+  $res = $conn->query($req1) ;
+  $users = $res->fetchAll();
+
+  return $users;
+
+}
+
+
+function getStocks()
+{
+  
+}
 ?>

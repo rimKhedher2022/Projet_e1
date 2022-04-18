@@ -14,7 +14,7 @@ $categories = getAllCategorie();
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.88.1">
-    <title>Admin profile</title>
+    <title>Admin stocks</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/dashboard/">
 
@@ -75,7 +75,7 @@ $categories = getAllCategorie();
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Liste des categories</h1>
+                    <h1 class="h2">stocks des produits</h1>
 
 
 
@@ -83,7 +83,7 @@ $categories = getAllCategorie();
 
 
                     <div>
-                        <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Ajouter</a>
+                        
                     </div>
 
 
@@ -137,8 +137,8 @@ $categories = getAllCategorie();
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Nom</th>
-                                <th scope="col">Desc</th>
+                                <th scope="col">Nom du Produit</th>
+                                <th scope="col">Quantité</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -155,7 +155,7 @@ $categories = getAllCategorie();
                                 <td>
                                     
                                     <a  data-bs-toggle="modal" data-bs-target="#editModal' . $c['id'] . '" class="btn btn-success">modifier</a>
-                                      <a onClick="return popUpDeleteCategorie()" href="supprimer.php?idc=' . $c['id'] . '" class="btn btn-danger">supprimer</a>
+                                      
 
 
                                 </td>
