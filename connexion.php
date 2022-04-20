@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-/*if (!isset($_SESSION['nom']))
+/*if (isset($_SESSION['nom']))
 {
 
     header('location:profile.php');
@@ -19,6 +19,7 @@ if(!empty($_POST))
   if( is_array($user) && count($user) > 0) // utilisateur connecté
   {
     Session_start();
+    $_SESSION['id'] = $user['id'] ;
     $_SESSION['email'] = $user['email'] ;
     $_SESSION['nom'] = $user['nom'] ;
     $_SESSION['prenom'] = $user['prenom'] ;
