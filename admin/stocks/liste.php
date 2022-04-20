@@ -105,7 +105,7 @@ $stocks = getStocks();
                         print ' <div class="alert alert-success">
                         stock modif avec succes
 
-                     </div>';
+                     </div>'; // code
                     }
                     ?>
                  
