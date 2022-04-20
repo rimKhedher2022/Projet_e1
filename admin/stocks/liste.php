@@ -121,11 +121,14 @@ $stocks = getStocks();
                                 <th scope="col">Quantité</th>
                                 <th scope="col">Action</th>
                             </tr>
+                            
                         </thead>
                         <tbody>
 
 
                             <?php
+
+                            // ici j'ai corrigé l'erreur du git 
                             $i=0;
                             foreach ($stocks as $s) {
                                 $i++;
