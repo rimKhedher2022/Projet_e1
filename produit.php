@@ -50,14 +50,24 @@ if(isset($_GET['id']))
                     if($c['id']==$produit['categorie'])
 
                     {
-                       print '<li class="list-group-item">'.$c['nom'].'</li>';
+                       print '<button class="list-group-item">'.$c['nom'].'</button>';
+
                     }
                 }
                 ?>
+               
                 
 
             </ul>
 
+        </div>
+
+        <div>
+            <form action="actions/commander.php" method="POST">
+                <input type="hidden" name="produit" value="<?php echo $produit['id'] ?>" >
+                <input type="number" class="form-control" name="quantite" step="1" placeholder="quantité de produit">
+            <button type="submit" class="btn btn-primary">commander</button>
+            </form>
         </div>
 
     </div>
