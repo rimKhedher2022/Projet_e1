@@ -290,7 +290,7 @@ $categories = getAllCategorie();
     <script>
         function popUpDeleteCategorie() {
 
-            return confirm("voulez vous vraiment supprimer la categorie?");
+            return confirm("voulez vous vraiment supprimer la categorie");
 
         }
     </script>

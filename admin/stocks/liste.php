@@ -97,39 +97,18 @@ $stocks = getStocks();
 
 
 
-                    <?php if (isset($_GET['ajout']) && $_GET['ajout'] == "ok") {
-                        print ' <div class="alert alert-success">
-                        categorie ajouté avec succes
+               
 
-                     </div>';
-                    }
-
-                    ?>
-
-                    <?php if (isset($_GET['delete']) && $_GET['delete'] == "ok") {
-                        print ' <div class="alert alert-success">
-                        categorie sup avec succes
-
-                     </div>';
-                    }
-
-                    ?>
+                    
 
                     <?php if (isset($_GET['modif']) && $_GET['modif'] == "ok") {
                         print ' <div class="alert alert-success">
-                        categorie modif avec succes
+                        stock modif avec succes
 
                      </div>';
                     }
                     ?>
-                    <?php if (isset($_GET['erreur']) && $_GET['erreur'] == "duplicate") { //ajout
-                        print ' <div class="alert alert-danger">
-                        categorie existe 
-
-                     </div>';
-                    }
-
-                    ?>
+                 
 
 
 
@@ -147,15 +126,17 @@ $stocks = getStocks();
 
 
                             <?php
+                            $i=0;
                             foreach ($stocks as $s) {
+                                $i++;
                                 print '
                                 <tr>
-                                <th scope="row">' . $c['id'] . '</th>
-                                <td>' . $s['nom'] . '</td>
-                                <td>' . $s['description'] . '</td>
+                                <th scope="row">' . $i . '</th>
+                                <td>' . $s['nom']. '</td>
+                                <td>' .$s['quantite'].'</td>
                                 <td>
                                     
-                                    <a  data-bs-toggle="modal" data-bs-target="#editModal' . $s['id'] . '" class="btn btn-success">modifier</a>
+            <a data-bs-toggle="modal" data-bs-target="#editModal' . $s['id'] . '" class="btn btn-success">modifier</a>
                                       
 
 
@@ -182,76 +163,26 @@ $stocks = getStocks();
     </div>
 
 
-
-    <!-- Modal Ajout -->
-
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ajout Categorie</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="ajout.php" method="post" id="addform">
-                        <div class="form-group" id="blocknom">
-                            <input type="text" id="nom" name="nom" class="form-control" placeholder="nom cat">
-
-                        </div>
-                        <div class="form-group">
-                            <textarea name="description" class="form-control" placeholder="description categorie"></textarea>
-
-                        </div>
-
-
-
-                </div>
-                <div class="modal-footer">
-
-                    <button type="submit" class="btn btn-primary">ajouter</button>
-                </div>
-                </form>
-
-
-
-
-
-
-
-
-
-            </div>
-        </div>
-
-    </div>
-
-
-
     <?php
-    foreach ($categories as $index => $categorie) { ?>
+    foreach ($stocks as $index => $stock) { ?>
 
         <!-- Modal Modification -->
 
-        <div class="modal fade" id="editModal<?php echo $categorie['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="editModal<?php echo $stock['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="editModalLabel">modifier Categorie</h5>
+                        <h5 class="modal-title" id="editModalLabel">modifier stock du <?php echo $stock['nom']; ?> </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <form action="modifier.php" method="post">
-                            <input type="hidden" value="<?php echo $categorie['id']; ?>" name="idc" />
+                            <input type="hidden" value="<?php echo $stock['id']; ?>" name="idstock" />
                             <div class="form-group">
-                                <input type="text" name="nom" class="form-control" value="<?php echo $categorie['nom']; ?>" placeholder="nom cat">
+                                <input type="number" step="1" name="quantite" class="form-control" value="<?php echo $stock['quantite']; ?>" placeholder="stock du produit ..">
 
                             </div>
-                            <div class="form-group">
-                                <textarea name="description" class="form-control" placeholder="description categorie"> <?php echo $categorie['description']; ?> </textarea>
-
-                            </div>
+                           
 
 
                     </div>
@@ -267,6 +198,16 @@ $stocks = getStocks();
     <?php
     }
     ?>
+
+
+
+
+
+ 
+
+
+
+  
 
 
 

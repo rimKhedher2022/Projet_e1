@@ -140,9 +140,9 @@ function getStocks()
 {
   $conn = connect();
 
-  $req1="SELECT nom, quantite from produit,stock where ptoduit.id=stock.produit"; 
-  $res = $conn->query($req1) ;
-  $stocks = $res->fetchAll();
+  $req1="SELECT s.id,p.nom , s.quantite FROM produit p,stock s WHERE p.id=s.produit"; 
+  $res1 = $conn->query($req1) ;
+  $stocks = $res1->fetchAll();
 
   return $stocks;
 
