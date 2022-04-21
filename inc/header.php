@@ -26,10 +26,17 @@
               </li>
               <?php if ( isset($_SESSION['nom'])) 
               {
+
+
                 print '
                 <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="profile.php">profile</a>
               </li>';
+                print '
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="panier.php">panier<span class="text-danger">('.count($_SESSION['panier'][3]).')</span></a>
+              </li>';
+               
                 
                 
               } 
