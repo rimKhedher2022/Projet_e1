@@ -147,4 +147,21 @@ function getStocks()
   return $stocks;
 
 }
+
+
+
+function  getAllCommandes()
+{
+  $conn = connect();
+
+  $req1="SELECT v.nom , v.prenom,v.telephone,p.total , p.etat , p.date_creation , p.id FROM panier p,visiteur v WHERE p.visiteur = v.id"; 
+  $res1 = $conn->query($req1) ;
+  $commandes = $res1->fetchAll();
+
+  return $commandes;
+
+}
+
+
+
 ?>

@@ -31,6 +31,12 @@
               stocks
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="http://<?php  echo $_SERVER['HTTP_HOST'] ;?>/e-commerce/admin/commandes/liste.php">
+              <span data-feather="bar-chart-2"></span>
+              commandes
+            </a>
+          </li>
 
           <li class="nav-item">
             <a class="nav-link" href="#">
