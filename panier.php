@@ -2,7 +2,13 @@
 <?php
 session_start();
 include "inc/functions.php";
-$total=$_SESSION['panier'][1];
+
+$total =0;
+if(isset($_SESSION['panier']))
+{
+  $total=$_SESSION['panier'][1];
+}
+
 
 
 $categories = getAllCategorie();
@@ -20,15 +26,16 @@ else{
   $produits = getAllProducts(); 
 }
 
+$commandes=array();
 
 
 if(isset($_SESSION['panier']))
 
 {
-   /* if(count($_SESSION['panier'][3]) >0)
-    {*/
+   if(count($_SESSION['panier'][3]) >0)
+  
         $commandes = $_SESSION['panier'][3];
-    //}
+   
 }
 
 
@@ -83,7 +90,7 @@ if(isset($_SESSION['panier']))
                 <td>' .$com[5]. '</td>
                 <td>'. $com[0].'</td>
                 <td>'. $com[1].'</td>
-                <td><a href="enlever-panier.php" class="btn btn-danger">supprimer</a></td>
+                <td><a href="actions/enlever-produit-panier.php?id='.$index.'" class="btn btn-danger">supprimer</a></td>
                 
                 </tr>';
             }
@@ -95,7 +102,7 @@ if(isset($_SESSION['panier']))
 
     <h3>Total : <?php echo $total ?> DTT</h3>
     <hr/>
-    <button class="btn btn-success" style="width:100px"> Valider </button> 
+    <a href ="actions/valider-panier.php" class="btn btn-success" style="width:100px"> Valider </a> 
     </div>
 
 

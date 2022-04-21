@@ -56,20 +56,7 @@ $_SESSION['panier'][3][]=array($quantite,$total,$date,$date,$id_produit,$produit
 
 
 
-// $req_panier="INSERT INTO panier (visiteur, total ,date_creation) VALUES('$visiteur','$total','$date') ";
-// $res1 = $conn->query($req_panier);
 
-// $panier_id=$conn->lastInsertId();
-
-
-
-
-
-// // ajouter commande 
-// // requete 
-
-// $requette2 ="INSERT INTO commande (quantite,total,panier,date_creation,date_modification,produit) VALUES ('$quantite','$total','$panier_id','$date','$date','$id_produit') ";
-// $res1 = $conn->query($requette2);
 
 header('location:../panier.php');
 
