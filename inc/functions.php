@@ -150,11 +150,27 @@ function getStocks()
 
 
 
-function  getAllCommandes()
+function  getAllPaniers()
 {
   $conn = connect();
 
   $req1="SELECT v.nom , v.prenom,v.telephone,p.total , p.etat , p.date_creation , p.id FROM panier p,visiteur v WHERE p.visiteur = v.id"; 
+  $res1 = $conn->query($req1) ;
+  $paniers = $res1->fetchAll();
+
+  return $paniers;
+
+}
+
+
+
+function getAllCommandes()
+
+{
+
+  $conn = connect();
+
+  $req1="SELECT p.nom, p.image , c.quantite , c.total , c.panier FROM commande c , produit p WHERE c.produit=p.id"; 
   $res1 = $conn->query($req1) ;
   $commandes = $res1->fetchAll();
 
@@ -164,4 +180,33 @@ function  getAllCommandes()
 
 
 
+
+function changerEtatPanier($data)
+
+{
+
+  $conn = connect();
+
+  $req1="UPDATE panier SET etat='".$data['etat']."' WHERE id='".$data['panier_id']."'";
+  $res1 = $conn->query($req1) ;
+  
+  
+
+}
+
+function getPaniersByEtat($paniers,$etat)
+
+{
+  $paniersEtat =array();
+
+  foreach($paniers as $p)
+  {
+    if($p['etat'] == $etat)
+    {
+      array_push($paniersEtat,$p);
+    }
+  }
+  return $paniersEtat;
+
+}
 ?>

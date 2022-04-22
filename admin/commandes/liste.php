@@ -1,8 +1,39 @@
 <?php
 session_start();
-
 include "../../inc/functions.php";
+if(isset($_POST['btnSubmit']))
+{
+//changer etat de panier
+
+changerEtatPanier($_POST);
+
+}
+
+
+
+$paniers = getAllPaniers();
 $commandes = getAllCommandes();
+
+if(isset($_POST['btnSearch']))
+
+{
+
+
+
+            if($_POST['etat']=="all")
+            {
+                $paniers = getAllPaniers();  
+            }
+            else
+            {
+                $paniers = getPaniersByEtat($paniers,$_POST['etat']);
+            }
+ 
+
+}
+
+
+
 ?>
 
 <!doctype html>
@@ -75,17 +106,14 @@ $commandes = getAllCommandes();
 
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Liste des commandes</h1>
+                    <h1 class="h2">Liste des paniers</h1>
 
 
 
 
 
 
-                    <div>
-                        
-                    </div>
-
+                
 
 
                 </div>
@@ -96,42 +124,23 @@ $commandes = getAllCommandes();
 
 
 
-                    <?php if (isset($_GET['ajout']) && $_GET['ajout'] == "ok") {
-                        print ' <div class="alert alert-success">
-                        categorie ajouté avec succes
 
-                     </div>';
-                    }
+                <form action="<?php echo $_SERVER['PHP_SELF'] ;?> " method="POST">
+                    <div class="form-group d-flex">
+                        <select name="etat" class="form-control">
+                            <option value="">-- choisir l'etat -- </option>
+                            <option value="all">all</option>
+                            <option value="en cours">en cours </option>
+                            <option value="livraison termine">Livraison termine</option>
+                            
+                        
+                        </select>
+                          <input  type="submit" value="chercher" name="btnSearch" class="btn btn-primary"/> 
 
-                    ?>
-
-                    <?php if (isset($_GET['delete']) && $_GET['delete'] == "ok") {
-                        print ' <div class="alert alert-success">
-                        categorie sup avec succes
-
-                     </div>';
-                    }
-
-                    ?>
-
-                    <?php if (isset($_GET['modif']) && $_GET['modif'] == "ok") {
-                        print ' <div class="alert alert-success">
-                        categorie modif avec succes
-
-                     </div>';
-                    }
-                    ?>
-                    <?php if (isset($_GET['erreur']) && $_GET['erreur'] == "duplicate") { //ajout
-                        print ' <div class="alert alert-danger">
-                        categorie existe 
-
-                     </div>';
-                    }
-
-                    ?>
-
-
-
+                    
+                    </div>
+               
+                </form>
 
                     <table class="table">
                         <thead>
@@ -140,6 +149,7 @@ $commandes = getAllCommandes();
                                 <th scope="col">Client</th>
                                 <th scope="col">Total</th>
                                 <th scope="col">Date</th>
+                                <th scope="col">Etat</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -148,18 +158,19 @@ $commandes = getAllCommandes();
 
                             <?php
                             $i=0;
-                            foreach ($commandes as $c) {
+                            foreach ($paniers as $p) {
                                 $i++;
                                 print '
                                 <tr>
                                 <th scope="row">' .$i. '</th>
-                                <td>' . $c['nom'] . '</td>
-                                <td>' . $c['total'] . '</td>
-                                <td>' . $c['date_creation'] . '</td>
+                                <td>' . $p['nom'].' '.$p['prenom']. '</td>
+                                <td>' . $p['total'] . '</td>
+                                <td>' . $p['date_creation'] . '</td>
+                                <td>' . $p['etat'] . '</td>
                                 <td>
                                     
-                                    <a  data-bs-toggle="modal" data-bs-target="#editModal' . $c['id'] . '" class="btn btn-success">modifier</a>
-                                      <a onClick="return popUpDeleteCategorie()" href="supprimer.php?idc=' . $c['id'] . '" class="btn btn-danger">supprimer</a>
+                                    <a  data-bs-toggle="modal" data-bs-target="#Commandes' . $p['id'] . '" class="btn btn-success">afficher</a>
+                                      <a data-bs-toggle="modal" data-bs-target="#Traiter'.$p['id'].'"  class="btn btn-primary">Traiter</a>
 
 
                                 </td>
@@ -185,6 +196,123 @@ $commandes = getAllCommandes();
     </div>
 
 
+
+    <?php
+    foreach ($paniers as $index => $p) { ?>
+
+        <!-- Modal Modification -->
+
+        <div class="modal fade" id="Commandes<?php echo $p['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">Liste des commandes</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                    <table class="table">
+
+                        <thread>
+                            <tr>
+                                <th>Nom produit</th>
+                                <th>Image</th>
+                                <th>Quantite</th>
+                                <th>total</th>
+                               
+                            </tr>
+                        </thread>
+                        <tbody>
+
+                        <?php
+                        foreach($commandes as $index =>$c)
+                        {
+
+                            if($c['panier'] == $p['id'])
+                            { // si commande appartient (panier ouvert)
+                                print'<tr>
+
+
+                                <td>'.$c['nom'].'</td>
+                                <td><img src="../../images/'.$c['image'].'" width="100"/></td>
+                                <td>'.$c['quantite'].'</td>
+                                <td>'.$c['total'].'</td>
+                               
+                                
+                            </tr>
+                            ';
+                            }
+                           
+                        }
+                        ?>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                       
+                   </div>
+
+                    <div class="modal-footer">
+                       
+                   </div>
+                </div>
+             </div>
+
+        </div>
+
+    <?php
+    }
+
+
+    foreach ($paniers as $index => $p) { ?>
+
+        <!-- Modal Modification -->
+
+        <div class="modal fade" id="Traiter<?php echo $p['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">triter la commande</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                    
+
+                    <form action="<?php $_SERVER['PHP_SELF']; ?>" method="post">
+
+                    <input type="hidden" value="<?php echo $p['id']; ?>" name="panier_id">
+                        <div class="form-group">
+                                <select name="etat" class="form-control">
+                                        <option value="en livraison">en cours</option>
+                                        <option value="en livraison termine"> livraison termine</option>                      
+                                </select>
+                        </div>
+                      
+                        <div class="form-group"> 
+                           <button type="submit" name="btnSubmit" class="btn btn-primary">sauvegarder</button>
+                        </div>
+
+                       
+                     </form>
+                    
+                    
+                   </div>
+
+                    <div class="modal-footer">
+                       
+                   </div>
+                </div>
+             </div>
+
+        </div>
+
+    <?php
+    }
+    ?>
 
    
 
