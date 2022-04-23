@@ -1,5 +1,16 @@
 <?php
 session_start(); 
+include "../inc/functions.php";
+if(isset($_POST['btnEdit']))
+{
+  if(EditAdmin($_POST))
+  {
+    $_SESSION['nom'] =$_POST['nom'];
+    $_SESSION['email'] =$_POST['email'];
+  }
+}
+
+
 ?>
 
 <!doctype html>
@@ -75,26 +86,67 @@ session_start();
         <div>
             <?php
             
-            //echo $_SESSION['nom'];
+            echo $_SESSION['nom'];
             ?>
         </div>
 
-
-
-
-
-
-
       </div>
 
+
+      <div class="container">
+            <h1>Nom : <span class="text-primary"><?php echo $_SESSION['nom'] ;?></span></h1>
+            <h1>Email :<?php echo $_SESSION['email']; ?>  </h1>
+            <a  data-bs-toggle="modal" data-bs-target="#profileEdit" class="btn btn-primary"> modifier </a>
+      </div>
+   
   
     </main>
   </div>
 </div>
 
 
-    <script src="../js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-      <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="../js/dashboard.js"></script>
+
+<div class="modal fade" id="profileEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">modifier profile</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="<?php $_SERVER['PHP_SELF'];?>" method="post">
+                          <input type="hidden" value="<?php echo $_SESSION['id'] ;?>" name="id_admin">
+                            <div class="form-group">
+                            <input type="text" name="nom" value="<?php echo $_SESSION['nom'] ;?>" class="form-control" placeholder="nom" >
+                            </div>
+                            <div class="form-group">
+                            <input type="email" name="email" value="<?php echo $_SESSION['email']; ?>" class="form-control" placeholder="email" >
+                            </div>
+                            <div class="form-group">
+                            <input type="password" name="mp"   class="form-control"  placeholder="mot de passe" >
+                            </div>
+                        
+                       
+                     
+                       
+                           
+
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="submit" name="btnEdit"   class="btn btn-primary">modifier</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="../js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
+      
+      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
+    <script src="../../js/dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   </body>
 </html>

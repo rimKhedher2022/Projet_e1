@@ -209,4 +209,29 @@ function getPaniersByEtat($paniers,$etat)
   return $paniersEtat;
 
 }
+
+
+
+function EditAdmin($data)
+
+{
+
+  $conn = connect();
+
+  if($data['mp']!="")
+  {
+    $req1="UPDATE administrateur SET nom='".$data['nom']."',email='".$data['email']."' ,mp ='".md5($data['mp'])."' WHERE id='".$data['id_admin']."'";
+
+  }
+  else
+  {
+    $req1="UPDATE administrateur SET nom='".$data['nom']."',email='".$data['email']."'  WHERE id='".$data['id_admin']."'";
+
+  }
+  
+  $res1 = $conn->query($req1) ;
+  return true;
+
+
+}
 ?>
