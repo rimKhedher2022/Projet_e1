@@ -234,4 +234,41 @@ function EditAdmin($data)
 
 
 }
+
+
+function getData()
+
+{
+      $data = array();
+      $conn = connect();
+// calculer le nombre des produits dans la base
+      $req1="SELECT COUNT(*) FROM produit";
+      $resultat= $conn->query($req1);  
+      $nbrProds=$resultat->fetch();
+
+
+
+// calculer le nombre des categories dans la base
+      $req2="SELECT COUNT(*) FROM categorie";
+      $resultat1= $conn->query($req2);  
+      $nbrCat = $resultat1->fetch();
+
+
+
+// calculer le nombre des visiteurs dans la base
+      $req3="SELECT COUNT(*) FROM visiteur";
+      $resultat2 = $conn->query($req3);
+      $nbrClients = $resultat2->fetch();
+
+      $data["produit"]=$nbrProds[0];
+      $data["categorie"]=$nbrCat[0];
+      $data["client"]=$nbrClients[0];
+
+      return $data ; 
+
+
+
+
+
+}
 ?>
