@@ -46,7 +46,7 @@ else{
       foreach($produits as $produit)
       {
         print ' <div class="col-3 mt-2">
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 14rem">
             <img src="images/'.$produit['image'].'" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">'.$produit['nom'].'</h5>
